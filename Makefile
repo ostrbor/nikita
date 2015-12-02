@@ -1,3 +1,3 @@
 .PHONY: prepare
-prepare
+prepare:
 	cp -n setting.py.dist setting.py
