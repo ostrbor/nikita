@@ -7,26 +7,32 @@ import re
 
 
 def make_query(sql):
-    with connection.cursor() as cursor:
-        cursor.execute(sql)
-        while True:
-            result = cursor.fetchone()
-            if not result: break
-            print(result)
+	with connection.cursor() as cursor:
+		cursor.execute(sql)
+		while True:
+			result = cursor.fetchone()
+			if not result: break
+			print(result)
 
 def get_input():
-    print('Making query to database %s' % db_info['db'])
-    print('Warning! Date format must be YYYY-mm-dd.')
-    date_re = r'\d{4}-\d{2}-\d{2}'
-    msg = 'Please enter %s: '
-    res = {k: input(msg % k) for k in sql_keys}
-    for (k, v) in res.items():
-        if re.search(date_re, v):
-            res[k] = datetime.strptime(v, '%Y-%m-%d')
-    return res
+	print('Making query to database %s' % db_info['db'])
+	print('Warning! Date format must be YYYY-mm-dd.')
+	date_re = r'\d{4}-\d{2}-\d{2}'
+	msg = 'Please enter %s: '
+	res = {k: input(msg % k) for k in sql_keys}
+	for (k, v) in res.items():
+		if re.search(date_re, v):
+			res[k] = datetime.strptime(v, '%Y-%m-%d')
+	return res
 
 if __name__ == '__main__':
-    user_data = get_input()
-    sql = sql_template % user_data
-    with pymysql.connect(**db_info):
-        make_query(sql)
+	user_data = get_input()
+	sql = sql_template % user_data
+	print(db_info)
+	with pymysql.connect(host='192.168.80.20',
+						user='root',
+						password='p244w0rd',
+						db='asteriskcdrdb',
+						charset='utf8',
+						cursorclass=pymysql.cursors.DictCursor):
+		make_query(sql)
