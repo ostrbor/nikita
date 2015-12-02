@@ -26,13 +26,14 @@ def get_input():
 	return res
 
 if __name__ == '__main__':
+        connection = pymysql.connect(host='192.168.80.20',
+                                     user='root',
+                                     password='p244w0rd',
+                                     db='asteriskcdrdb',
+                                     charset='utf8',
+                                     cursorclass=pymysql.cursors.DictCursor):
+	
 	user_data = get_input()
 	sql = sql_template % user_data
 	print(db_info)
-	with pymysql.connect(host='192.168.80.20',
-						user='root',
-						password='p244w0rd',
-						db='asteriskcdrdb',
-						charset='utf8',
-						cursorclass=pymysql.cursors.DictCursor):
-		make_query(sql)
+        make_query(sql)
