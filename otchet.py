@@ -26,10 +26,10 @@ def get_input():
 	return res
 
 if __name__ == '__main__':
-        connection = pymysql.connect(host='192.168.80.20',
-                                     user='root',
-                                     password='p244w0rd',
-                                     db='asteriskcdrdb',
+        connection = pymysql.connect(host='',
+                                     user='',
+                                     password='',
+                                     db='',
                                      charset='utf8',
                                      cursorclass=pymysql.cursors.DictCursor):
 	
