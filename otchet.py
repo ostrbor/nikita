@@ -20,7 +20,7 @@ def get_input():
     date_re = r'\d{4}-\d{2}-\d{2}'
     msg = 'Please enter %s: '
     res = {k: input(msg % k) for k in sql_keys}
-    for (k, v) in res:
+    for (k, v) in res.items():
         if re.search(date_re, v):
             res[k] = datetime.strptime(v, '%Y-%m-%d')
     return res
