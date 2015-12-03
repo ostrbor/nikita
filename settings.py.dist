@@ -1,13 +1,13 @@
 import pymysql
 
-select_date = {'calldate':0,
-                'answered >=40 <=80':1,
-                'answered >80':2,
-                'answered >=15 <40':3,
-                'NO ANSWER':4,
-                'BUSY':5,
-                'FAILED':7,
-                'answered <15':8,
+select_date = {'calldate':5,
+                'answered >=40 <=80':6,
+                'answered >80':7,
+                'answered >=15 <40':8,
+                'NO ANSWER':9,
+                'BUSY':10,
+                'FAILED':12,
+                'answered <15':13,
                 }
 
 db_info = {
