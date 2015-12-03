@@ -36,7 +36,7 @@ def save_xls(db_records, filename):
 			value = rec[key]
 			row_num = select_date.get(key, None)
 			if key == 'calldate': 
-				value = rec[key]strftime('%Y-%m-%d')
+				value = rec[key].strftime('%Y-%m-%d')
 			if row_num:
 				sheet.write(row_num, col_num, value)
 	book.save(filename + '.xls')
