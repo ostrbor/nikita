@@ -65,3 +65,4 @@ if __name__ == '__main__':
 	#		db_response.append(response)
 	print(db_response)
 	#save_xls(db_response)
+	con.close()
