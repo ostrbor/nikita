@@ -26,13 +26,7 @@ def get_input():
 	return res
 
 if __name__ == '__main__':
-        connection = pymysql.connect(host='',
-                                     user='',
-                                     password='',
-                                     db='',
-                                     charset='utf8',
-                                     cursorclass=pymysql.cursors.DictCursor):
-	
+        connection = pymysql.connect(**db_info)
 	user_data = get_input()
 	sql = sql_template % user_data
 	print(db_info)
