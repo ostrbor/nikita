@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import pymysql, re, xlwt
-from settings import db_info
+from settings import db_info, select_date
 from sql import sql_template, sql_keys
 from datetime import datetime, timedelta
 
@@ -30,11 +30,12 @@ def get_input():
 def save_xls(db_records):
 	book = xlwt.Workbook()
 	sheet = book.add_sheet("Sheet 1")
-	for rec_per_day in db_records:
-		rec = tuple(rec_per_day)
-		for column_num, value in enumerate(zip(*rec)):
-			for row_num in range(len(value)):
-				sheet.write(row_num, column_num, value[row_num])
+	for col_num, rec in enumerate(db_records):
+		if not rec: continue
+		for key in rec:
+			row_num = select_date.get(key, None)
+			if row_num:
+				sheet.write(row_num, col_num, rec[key])
 	book.save('book.xls')
 
 #def extract_dates(user_data):
@@ -65,5 +66,9 @@ if __name__ == '__main__':
 	#		response = make_query(connection, sql)
 	#		db_response.append(response)
 	print(db_response)
+	for i in db_response:
+		print(i)
+	print(len(db_response))
+	
 	#save_xls(db_response)
 	con.close()
