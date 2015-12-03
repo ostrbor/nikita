@@ -4,6 +4,6 @@ db_info = {
     'password': '',
     'db': '',
     'charset': 'utf8',
-    'cursorclass': 'pymysql.cursors.DictCursor',
+    'cursorclass': pymysql.cursors.DictCursor,
 }
 
