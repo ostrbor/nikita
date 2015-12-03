@@ -43,7 +43,7 @@ def extract_dates(user_data):
 if __name__ == '__main__':
 	user_data = get_input()
 	dates = extract_dates(user_data)
-	delta = max(dates) - min(dates)
+	min_date = min(dates); max_date = max(dates); delta = min_date - max_date;
 	sql_dates = [
 	for i in range(delta):
 		period = timedelta(days=i)
