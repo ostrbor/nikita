@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import pymysql
-from setting import db_info
+from settings import db_info
 from sql import sql_template, sql_keys
 from datetime import datetime
 import re
