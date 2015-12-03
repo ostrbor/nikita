@@ -25,8 +25,7 @@ def get_input():
 	return res
 
 if __name__ == '__main__':
+	user_data = get_input()
+	sql = sql_template % user_data
         with pymysql.connect(**db_info) as connection:
-		user_data = get_input()
-		sql = sql_template % user_data
-		print(db_info)
 		make_query(connection, sql)
