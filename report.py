@@ -54,9 +54,14 @@ if __name__ == '__main__':
 		converted_data['FinishDate'] = finish
 		sql = sql_template % converted_data
 		sql_array.append(sql)
-        with pymysql.connect(**db_info) as connection:
-        	for sql in sql_array:
-			response = make_query(connection, sql)
-			db_response.append(response)
+	con = pymysql.connect(**db_info)
+	cur = con.cursor()
+	for sql in sql_array:
+		res = cur.fetchall()
+		db_response.append(response)
+        #with pymysql.connect(**db_info) as connection:
+        #	for sql in sql_array:
+	#		response = make_query(connection, sql)
+	#		db_response.append(response)
 	print(db_response)
 	#save_xls(db_response)
