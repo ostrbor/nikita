@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-import pymysql
+import pymysql, re
 from settings import db_info
 from sql import sql_template, sql_keys
 from datetime import datetime, timedelta
-import re
 
 
 def make_query(connection, sql):
