@@ -27,16 +27,19 @@ def get_input():
 			user_data[k] = datetime.strptime(v, '%Y-%m-%d')
 	return user_data
 
-def save_xls(db_records):
+def save_xls(db_records, filename):
 	book = xlwt.Workbook()
 	sheet = book.add_sheet("Sheet 1")
 	for col_num, rec in enumerate(db_records):
 		if not rec: continue
 		for key in rec:
+			value = rec[key]
 			row_num = select_date.get(key, None)
+			if key == 'calldate': 
+				value = rec[key]strftime('%Y-%m-%d')
 			if row_num:
-				sheet.write(row_num, col_num, rec[key])
-	book.save('book.xls')
+				sheet.write(row_num, col_num, value)
+	book.save(filename + '.xls')
 
 #def extract_dates(user_data):
 #	dates = [v for (k, v) in user_data.items() if isinstance(v, datetime)]
@@ -70,5 +73,5 @@ if __name__ == '__main__':
 		print(i)
 	print(len(db_response))
 	
-	#save_xls(db_response)
+	save_xls(db_response, user_data['No_Disp'])
 	con.close()
