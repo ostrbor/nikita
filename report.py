@@ -35,12 +35,18 @@ def save_xls(db_records):
 			for row_num in range(len(value)):
 				sheet.write(row_num, column_num, value[row_num])
 	book.save('book.xls')
-	
-def calc_days(date0, date1):
-	return date1-date0 if date1>date0 else date0-date1
+
+def extract_dates(user_data):
+	dates = [v for (k, v) in user_data.items() if isinstance(v, datetime)]
+	return dates
 
 if __name__ == '__main__':
 	user_data = get_input()
+	dates = extract_dates(user_data)
+	delta = max(dates) - min(dates)
+	sql_dates = [
+	for i in range(delta):
+		period = timedelta(days=i)
 	sql = sql_template % user_data
         with pymysql.connect(**db_info) as connection:
 		make_query(connection, sql)sheet1 = book.add_sheet("Sheet 1")
