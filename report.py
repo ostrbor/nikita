@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import re
 
 
-def make_query(sql):
+def make_query(connection, sql):
 	with connection.cursor() as cursor:
 		cursor.execute(sql)
 		while True:
@@ -26,8 +26,8 @@ def get_input():
 	return res
 
 if __name__ == '__main__':
-        connection = pymysql.connect(**db_info)
-	user_data = get_input()
-	sql = sql_template % user_data
-	print(db_info)
-        make_query(sql)
+        with pymysql.connect(**db_info) as connection:
+		user_data = get_input()
+		sql = sql_template % user_data
+		print(db_info)
+		make_query(connection, sql)
