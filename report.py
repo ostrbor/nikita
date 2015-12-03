@@ -8,10 +8,12 @@ from datetime import datetime, timedelta
 def make_query(connection, sql):
 	with connection.cursor() as cursor:
 		cursor.execute(sql)
-		while True:
-			result = cursor.fetchone()
-			if not result: break
-			print(result)
+		result = cursor.fetchall()
+		print(result)
+		#while True:
+		#	result = cursor.fetchone()
+		#	if not result: break
+		#	print(result)
 
 def get_input():
 	print('Making query to database %s' % db_info['db'])
