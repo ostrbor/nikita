@@ -35,8 +35,8 @@ def save_xls(db_records, filename):
 		for key in rec:
 			value = rec[key]
 			row_num = select_date.get(key, None)
-			if key == 'calldate': 
-				value = rec[key].strftime('%Y-%m-%d')
+			if key == 'calldate':
+				value = rec[key].strftime('%Y.%m.%d')
 			if row_num:
 				sheet.write(row_num, col_num, value)
 	book.save(filename + '.xls')
@@ -68,10 +68,10 @@ if __name__ == '__main__':
         #	for sql in sql_array:
 	#		response = make_query(connection, sql)
 	#		db_response.append(response)
-	print(db_response)
-	for i in db_response:
-		print(i)
-	print(len(db_response))
+	#print(db_response)
+	#for i in db_response:
+	#	print(i)
+	#print(len(db_response))
 	
 	save_xls(db_response, user_data['No_Disp'])
 	con.close()
