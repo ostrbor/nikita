@@ -57,6 +57,7 @@ if __name__ == '__main__':
 	con = pymysql.connect(**db_info)
 	cur = con.cursor()
 	for sql in sql_array:
+		cur.execute(sql)
 		res = cur.fetchall()
 		db_response.append(res)
         #with pymysql.connect(**db_info) as connection:
