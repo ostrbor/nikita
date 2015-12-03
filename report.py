@@ -10,6 +10,7 @@ def make_query(connection, sql):
 		cursor.execute(sql)
 		rows = cursor.fetchall()
 		print(rows)
+		return rows
 		#while True:
 		#	result = cursor.fetchone()
 		#	if not result: break
@@ -36,17 +37,26 @@ def save_xls(db_records):
 				sheet.write(row_num, column_num, value[row_num])
 	book.save('book.xls')
 
-def extract_dates(user_data):
-	dates = [v for (k, v) in user_data.items() if isinstance(v, datetime)]
-	return dates
+#def extract_dates(user_data):
+#	dates = [v for (k, v) in user_data.items() if isinstance(v, datetime)]
+#	return dates
 
 if __name__ == '__main__':
-	user_data = get_input()
-	dates = extract_dates(user_data)
-	min_date = min(dates); max_date = max(dates); delta = min_date - max_date;
-	sql_dates = [
-	for i in range(delta):
-		period = timedelta(days=i)
-	sql = sql_template % user_data
+	user_data = get_input(); start_date =  user_data['StartDate']
+	delta = user_data['FinishDate'] - start_date
+	converted_data = user_data.copy()
+	sql_array = []
+	db_response = []
+	for i in range(delta.days):
+		start = start_date + timedelta(days=i)
+		finish = start_date + timedelta(days=i+1)
+		converted_data['StartDate'] = start
+		converted_data['FinishDate'] = finish
+		sql = sql_template % converted_data
+		sql_array.append(sql)
         with pymysql.connect(**db_info) as connection:
-		make_query(connection, sql)sheet1 = book.add_sheet("Sheet 1")
+        	for sql in sql_array:
+			response = make_query(connection, sql)
+			db_response.append(response)
+	print(db_response)
+	#save_xls(db_response)
